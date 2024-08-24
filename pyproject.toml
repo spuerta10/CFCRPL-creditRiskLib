@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "credit-risk-pipeline-lib"
+version = "0.1.0"
+description = ""
+authors = ["Santiago Puerta <spuertaf@eafit.edu.co>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^2.1.0"
+pandas = "^2.2.2"
+functions-framework = "^3.8.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
