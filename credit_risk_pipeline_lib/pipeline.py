@@ -1,6 +1,6 @@
 from credit_risk_pipeline_lib.ingest.ingest_interface import IngestInterface
 from credit_risk_pipeline_lib.transform.transform_interface import TransformInterface
-#from credit_risk_pipeline_lib.load.load_interface import LoadInterface
+from credit_risk_pipeline_lib.load.load_interface import LoadInterface
 from credit_risk_pipeline_lib.pipeline_step_interface import PipelineStepInterface
 
 from typeguard import typechecked
@@ -13,12 +13,12 @@ class Pipeline:
             self, 
             ingest_stage: IngestInterface,
             transform_stage: TransformInterface | None = None,  # maybe I dont want to transform the data
-            load_stage: None = None,  # maybe I dont want to load the data
+            load_stage: LoadInterface | None = None,  # maybe I dont want to load the data
     ):
         self._ingest_stage = ingest_stage
         self._transform_stage = transform_stage
         self._load_stage = load_stage
-        self._steps: list[PipelineStepInterface | None] = list(self._ingest_stage, self._transform_stage, self._load_stage)
+        self._steps: list[PipelineStepInterface | None] = [self._ingest_stage, self._transform_stage, self._load_stage]
 
     
     def run(self):
