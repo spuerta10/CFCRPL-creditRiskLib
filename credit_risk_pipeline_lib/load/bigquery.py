@@ -1,16 +1,16 @@
 from copy import deepcopy
 
-#from credit_risk_pipeline_lib.load.load_interface import LoadInterface
+from credit_risk_pipeline_lib.load.load_interface import LoadInterface
 
 from pandas import DataFrame
 from pandas_gbq import to_gbq
 
-class BigQuery():
+class BigQuery(LoadInterface):
     def __init__(
             self,
             gcp_project_id: str,
             gcp_bq_table_id: str, 
-            stage_name: str = "BigQuery Load"
+            step_name: str = "BigQuery Load"
     ):
         """Load Step to Google BigQuery.
 
@@ -21,7 +21,7 @@ class BigQuery():
         """
         self._gcp_project_id = gcp_project_id
         self._gcp_bq_table_id = gcp_bq_table_id
-        self._stage_name = stage_name
+        self._step_name = step_name
 
     def load(self, load_data: DataFrame):
         """Loads a given DataFrame to Google Big Query
