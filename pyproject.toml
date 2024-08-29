@@ -12,6 +12,7 @@ pandas = "^2.2.2"
 functions-framework = "^3.8.1"
 pandas-gbq = "^0.23.1"
 typeguard = "^4.3.0"
+pydantic = "^2.8.2"
 
 
 [build-system]
