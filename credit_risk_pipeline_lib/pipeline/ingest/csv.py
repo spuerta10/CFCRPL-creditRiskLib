@@ -1,4 +1,4 @@
-from credit_risk_pipeline_lib.ingest.ingest_interface import IngestInterface
+from credit_risk_pipeline_lib.pipeline.ingest.ingest_interface import IngestInterface
 
 from pandas import DataFrame, read_csv
 

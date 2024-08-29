@@ -1,6 +1,6 @@
 from base64 import b64decode
 
-from credit_risk_pipeline_lib.ingest.ingest_interface import IngestInterface
+from credit_risk_pipeline_lib.pipeline.ingest.ingest_interface import IngestInterface
 
 from cloudevents.http import CloudEvent
 from pandas import DataFrame
