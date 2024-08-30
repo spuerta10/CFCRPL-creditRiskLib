@@ -21,7 +21,7 @@ class Pipeline:
         self._steps: list[PipelineStepInterface | None] = [self._ingest_stage, self._transform_stage, self._load_stage]
 
     
-    def run(self):
+    def run(self) -> DataFrame:
         """
         Executes the defined Pipeline object.
         """
@@ -31,6 +31,8 @@ class Pipeline:
         if self._load_stage is not None:
             load_data: DataFrame = self._load_stage.load(transformed_data) \
                 if transformed_data is not None else self._load_stage.load(ingested_data)
+            return load_data
+        return transformed_data
             
     
     def __str__(self) -> str:
