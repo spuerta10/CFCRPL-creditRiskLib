@@ -8,7 +8,7 @@ from pandas import DataFrame
 from numpy import ndarray
 
 
-class MlModel:
+class MLModel:
     def __init__(self, model_conf_path: str, model_conf_schema: None | BaseModel = None):
         """Instance to retrieve a specified model from MLFlow. 
 
