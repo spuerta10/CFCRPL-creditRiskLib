@@ -1,0 +1,31 @@
+name: Build and push to Artifact Registry
+
+on:
+  push:
+    branches: ["dev"]
+  pull_request:
+    branches: ["dev"]
+env:
+  GAR_LOCATION: https://us-central1-python.pkg.dev/creditriskmlops/python-packages-repo
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11.9'
+    - name: Install Poetry
+      run: curl -sSL https://install.python-poetry.org | python3 - -y
+    - name: Configure Poetry
+      run: poetry install --sync --no-interaction
+    - name: Add GAR location to poetry
+      run: poetry config repositories.gcp ${{ env.GAR_LOCATION }}
+    - name: Auth to GCP
+      uses: google-github-actions/auth@v0.4.0
+      with:
+        credentials_json: ${{ secretes.SERVICE_ACCOUNT_KEY }}
+    - name: Build and publish to Artifact Registry
+      run: poetry publish --build --repository gcp
