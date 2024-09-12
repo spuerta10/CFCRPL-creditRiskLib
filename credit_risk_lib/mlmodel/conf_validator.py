@@ -7,7 +7,7 @@ from mlflow.exceptions import MlflowException
 
 
 class ConfValidator:
-    def __init__(self, model_conf_path: str, model_conf_schema: None | BaseModel = None):
+    def __init__(self, model_conf: str | Config, model_conf_schema: None | BaseModel = None):
         """Instance to retrieve a specified model from MLFlow. 
 
         Args:
@@ -18,7 +18,8 @@ class ConfValidator:
             ValueError: If mlflow_ip field is not present in config file.
             ValueError: If mlflow_ip field is not str type.
         """
-        self._conf: Config = ConfigFactory.get_conf(model_conf_path, model_conf_schema)
+        self._conf: Config = model_conf if isinstance(model_conf, Config) else \
+            ConfigFactory.get_conf(model_conf, model_conf_schema)
         if not hasattr(self._conf, "mlflow_ip"):  # force that mlflow_ip is present in config file
             raise ValueError("mlflow_ip field must be in conf and was not found.")
         if not isinstance(getattr(self._conf, "mlflow_ip"), str):  # force that mlflow_ip is str type.

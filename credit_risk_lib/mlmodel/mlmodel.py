@@ -1,4 +1,5 @@
 from credit_risk_lib.mlmodel.conf_validator import ConfValidator
+from credit_risk_lib.config.config import Config
 
 from pydantic import BaseModel
 import mlflow
@@ -8,7 +9,7 @@ from numpy import ndarray
 
 
 class MLModel(ConfValidator):
-    def __init__(self, model_conf_path: str, model_conf_schema: None | BaseModel = None):
+    def __init__(self, model_conf: str | Config, model_conf_schema: None | BaseModel = None):
         """Instance to retrieve a specified model from MLFlow. 
 
         Args:
@@ -16,7 +17,7 @@ class MLModel(ConfValidator):
             model_conf_schema (None | BaseModel, optional): A pydantic class to validate that the content of a config file follows a given schema. 
             Defaults to None.
         """
-        super().__init__(model_conf_path, model_conf_schema)
+        super().__init__(model_conf, model_conf_schema)
     
     
     def fetch(
