@@ -32,8 +32,8 @@ jobs:
         credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
     - name: Set up Artifact Registry credentials
       run: |
-        echo "$GCP_CREDENTIALS" > ~/key.json
-        gcloud auth activate-service-account --key-file=~/key.json
+        echo "$GCP_CREDENTIALS" > /_temp/key.json
+        gcloud auth activate-service-account --key-file= /_temp/key.json
         gcloud config set project $PROJECT_ID
         gcloud auth configure-docker $GAR_LOCATION-docker.pkg.dev
     - name: Publish package
