@@ -7,6 +7,7 @@ on:
     branches: ["dev"]
 env:
   GAR_LOCATION: https://us-central1-python.pkg.dev/creditriskmlops/python-packages-repo
+  GCP_CREDENTIALS: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -17,8 +18,11 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: '3.11.9'
-    - name: Install Poetry
-      run: curl -sSL https://install.python-poetry.org | python3 - -y
+    - name: Install Poetry and Twine
+      run: | 
+        curl -sSL https://install.python-poetry.org
+        python3 - -y
+        python3 -m pip install twine
     - name: Configure Poetry
       run: poetry install --sync --no-interaction
     - name: Add GAR location to poetry
@@ -26,6 +30,14 @@ jobs:
     - name: Auth to GCP
       uses: google-github-actions/auth@v0.4.0
       with:
-        credentials_json: ${{ secretes.SERVICE_ACCOUNT_KEY }}
+        credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
     - name: Build and publish to Artifact Registry
       run: poetry publish --build --repository gcp
+    - name: Set up Artifact Registry and upload
+      run: |
+        gcloud config set project creditriskmlops
+        gcloud config set artifacts/repository python-packages-repo
+        gcloud config set artifacts/location us-central1
+        echo "$GCP_CREDENTIALS" | gcloud auth activate-service-account --key-file=/dev/stdin
+        python3 -m twine upload --repository-url https://us-central1-python.pkg.dev/creditriskmlops/python-packages-repo/ dist/* 
+        
