@@ -1,6 +1,6 @@
 from abc import abstractmethod
 
-from credit_risk_pipeline_lib.pipeline.pipeline_step_interface import PipelineStepInterface
+from credit_risk_lib.pipeline.pipeline_step_interface import PipelineStepInterface
 
 from pandas import DataFrame
 

@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from credit_risk_pipeline_lib.pipeline.load.load_interface import LoadInterface
+from credit_risk_lib.pipeline.load.load_interface import LoadInterface
 
 from pandas import DataFrame
 from pandas_gbq import to_gbq

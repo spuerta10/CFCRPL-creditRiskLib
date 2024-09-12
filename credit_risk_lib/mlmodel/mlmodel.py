@@ -1,5 +1,5 @@
-from credit_risk_pipeline_lib.config.config import Config
-from credit_risk_pipeline_lib.config.config_factory import ConfigFactory
+from credit_risk_lib.config.config import Config
+from credit_risk_lib.config.config_factory import ConfigFactory
 
 from pydantic import BaseModel
 import mlflow

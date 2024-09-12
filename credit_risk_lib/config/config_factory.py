@@ -1,7 +1,7 @@
 from pathlib import Path
 from os import path
 
-from credit_risk_pipeline_lib.config.config import Config
+from credit_risk_lib.config.config import Config
 
 from pydantic import BaseModel
 

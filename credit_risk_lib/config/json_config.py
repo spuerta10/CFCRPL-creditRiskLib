@@ -1,6 +1,6 @@
 import json
 
-from credit_risk_pipeline_lib.config.config import Config
+from credit_risk_lib.config.config import Config
 
 from pydantic import BaseModel
 

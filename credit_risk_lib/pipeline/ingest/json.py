@@ -1,7 +1,7 @@
 from pathlib import Path
 from os.path import abspath
 
-from credit_risk_pipeline_lib.pipeline.ingest.ingest_interface import IngestInterface
+from credit_risk_lib.pipeline.ingest.ingest_interface import IngestInterface
 
 from pandas import DataFrame, read_json
 
