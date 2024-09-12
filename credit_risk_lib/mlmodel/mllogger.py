@@ -7,7 +7,7 @@ import mlflow
 
 class MLLogger(ConfValidator):
     def __init__(self, model_conf: str | Config, model_conf_schema: None | BaseModel = None) -> None:
-        super.__init__(model_conf, model_conf_schema)
+        super().__init__(model_conf, model_conf_schema)
         
     
     def log_param(self, *args):
