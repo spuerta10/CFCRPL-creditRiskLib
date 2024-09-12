@@ -26,7 +26,7 @@ jobs:
     - name: Configure Poetry
       run: poetry install --sync --no-interaction
     - name: Add GAR location to poetry
-      run: poetry config repositories.gcp ${{ env.GAR_LOCATION }}
+      run: poetry config repositories.gcp ${{ env.GAR_URL }}
     - name: Auth to GCP
       uses: google-github-actions/auth@v0.4.0
       with:
@@ -39,5 +39,5 @@ jobs:
         gcloud config set artifacts/repository python-packages-repo
         gcloud config set artifacts/location us-central1
         echo "$GCP_CREDENTIALS" | gcloud auth activate-service-account --key-file=/dev/stdin
-        python3 -m twine upload --repository-url https://us-central1-python.pkg.dev/creditriskmlops/python-packages-repo/ dist/* 
+        python3 -m twine upload --repository-url $GAR_LOCATION/ dist/* 
         
