@@ -2,9 +2,9 @@ name: Build and push to Artifact Registry
 
 on:
   push:
-    branches: ["dev"]
+    branches: ["main"]
   pull_request:
-    branches: ["dev"]
+    branches: ["main"]
 env:
   GAR_LOCATION: https://us-central1-python.pkg.dev/creditriskmlops/python-packages-repo
   GCP_CREDENTIALS: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
