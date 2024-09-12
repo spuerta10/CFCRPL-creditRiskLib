@@ -28,6 +28,4 @@ jobs:
       with:
         credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
     - name: Print access token
-      run: $(gcloud auth print-access-token)
-    - name: Build and publish to Artifact Registry
-      run: poetry publish --build --repository gcp
+      run: gcloud auth print-access-token
