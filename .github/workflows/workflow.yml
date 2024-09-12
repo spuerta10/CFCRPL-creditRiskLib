@@ -9,6 +9,7 @@ env:
   PROJECT_ID: creditriskmlops
   GAR_LOCATION: us-central1
   GAR_URL: https://us-central1-python.pkg.dev/creditriskmlops/python-packages-repo
+  GCP_CREDENTIALS: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -31,6 +32,7 @@ jobs:
         credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
     - name: Set up Artifact Registry credentials
       run: |
+        gcloud auth activate-service-account sa-githubactions@creditriskmlops.iam.gserviceaccount.com --key-file=$GCP_CREDENTIALS --project=$PROJECT_ID
         gcloud config set project ${{ env.PROJECT_ID }}
         gcloud auth configure-docker ${{ env.GAR_LOCATION }}-docker.pkg.dev
     - name: Publish package
